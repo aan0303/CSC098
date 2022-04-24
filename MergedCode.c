@@ -16,7 +16,8 @@ void Aircraft();
 void Logo();
 
 char name[200], nationality[200], placeOfBirth[200];
-int age;
+int age, canContinue = 1;
+
 float totalMeal = 0, totalPriceTicket, totalPrice, totalBaggage;
 
 int main()
@@ -24,10 +25,10 @@ int main()
 
     int menu;
     char wantContinue;
-    int canContinue = 1;
 
     Logo();
     UserInfo();
+    Condition();
 
     while (canContinue == 1)
     {
@@ -171,14 +172,14 @@ int Booking()
         if (totalPrice > 500)
         {
             totalPrice *= 0.9;
-            printf("%65s%.2f\n%62s %d", "Overall Total: RM", totalPrice, "Total number ticket:", numberTicket);
+            printf("%62s %d\n%65s%.2f", "Total number ticket:", numberTicket, "Overall Total: RM", totalPrice);
             printf("\n\n%102s\n%78s", "Due to the pandemic of Covid 19, Selangor Airways will give a 10%% discount ", "for customers with a total price more than RM500.00.");
 
             Aircraft();
         }
         else
         {
-            printf("%65s%.2f\n%63s%d", "Overall Total: RM", totalPrice, "Number of ticket: ", numberTicket);
+            printf("%62s %d\n%65s%.2f", "Total number ticket:", numberTicket, "Overall Total: RM", totalPrice);
 
             Aircraft();
         }
@@ -196,13 +197,11 @@ void ListDestination()
     printf("%107s", "[C]             Kota Bharu            11:30am           1:30pm           RM210.00 \n");
     printf("%107s", "[D]             Johor Bharu           10:00am           11:15pm          RM185.50 \n");
     printf("%107s", "[E]             Penang                11:00am           12:30pm          RM190.50 \n");
-    printf("%107s", "[F]             Alor Setar            12:00am           2:00pm           RM210.00 \n");
+    printf("%107s", "[F]             Alor Setar            12:00am           2:00pm           RM210.50 \n");
 }
 
 void UserInfo()
 {
-    char terms1, terms2;
-    int birthYear, i, numberOfTerms = 2;
 
     printf("\n\n");
     printf("%82s", "-------------User Info--------------\n\n");
@@ -218,45 +217,55 @@ void UserInfo()
 
     printf("%62s", "Please insert your age: ");
     scanf("%d", &age);
+}
+
+void Condition()
+{
+    int numberOfTerms = 2, i;
+    char terms1, terms2;
 
     if (age < 18)
     {
         printf("%80s", "Sorry but you're not permitted to travel alone at the age of below 18\n");
-    }
-
-    printf("\n\n");
-    printf("%81s", "-------Terms and Regulations--------\n\n");
-    printf("%97s", "Please read the terms accordingly and agree to continue this operation");
-
-    for (i = 0; i < numberOfTerms; i++)
-    {
-        switch (i)
-        {
-        case 0:
-        {
-            printf("\n\n");
-            printf("%102s", "Customers must arrive at the departure stations 30 mins before take off (y/n): ");
-            scanf(" %c", &terms1);
-            break;
-        }
-        case 1:
-        {
-            printf("\n");
-            printf("%110s", "Customers should not bring any dangerous substance or alcholic drinks on the aircraft (y/n): ");
-            scanf(" %c", &terms2);
-            break;
-        }
-        }
-    }
-
-    if (terms1 == 'y' && terms2 == 'y')
-    {
-        printf("\n");
-        printf("%77s", "Thank you for your cooperation\n\n");
+        canContinue = 0;
     }
     else
     {
-        printf("\nDue to the fact that you doesn't agree with our terms and regulations we cannot continue this operation.");
+        printf("\n\n");
+        printf("%81s", "-------Terms and Regulations--------\n\n");
+        printf("%97s", "Please read the terms accordingly and agree to continue this operation");
+
+        for (i = 0; i < numberOfTerms; i++)
+        {
+            switch (i)
+            {
+            case 0:
+            {
+                printf("\n\n");
+                printf("%102s", "Customers must arrive at the departure stations 30 mins before take off (y/n): ");
+                scanf(" %c", &terms1);
+                break;
+            }
+            case 1:
+            {
+                printf("\n");
+                printf("%110s", "Customers should not bring any dangerous substance or alcholic drinks on the aircraft (y/n): ");
+                scanf(" %c", &terms2);
+                break;
+            }
+            }
+        }
+
+        if (terms1 == 'y' && terms2 == 'y')
+        {
+            printf("\n");
+            printf("%77s", "Thank you for your cooperation\n\n");
+        }
+        else
+        {
+            printf("\nDue to the fact that you doesn't agree with our terms and regulations we cannot continue this operation.\n");
+            canContinue = 0;
+        }
     }
 }
 
