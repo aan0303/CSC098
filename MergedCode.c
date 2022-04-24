@@ -15,6 +15,7 @@ void ListBaggageAllowance();
 void Aircraft();
 void Logo();
 
+void Condition();
 char name[200], nationality[200], placeOfBirth[200];
 int age, canContinue = 1;
 
@@ -60,8 +61,9 @@ int main()
         case 3:
             ListBaggageAllowance();
             canContinue = 0;
+            break;
         default:
-            printf("\n\n%66s\n", "Invalid Input");
+            printf("\n\n%66s\n", "Invalid Input Number 1");
             canContinue = 0;
             break;
         }
@@ -139,7 +141,7 @@ int Booking()
 
         break;
     default:
-        printf("\n%67s", "Invalid Input");
+        printf("\n%67s", "Invalid Input Number 2");
         canContinue2 = 0;
         break;
     }
@@ -151,14 +153,16 @@ int Booking()
         scanf("%d", &numberTicket);
         totalPriceTicket = numberTicket * ticketPrice;
 
+        printf("%68s %.2f\n", "Total Price Ticket: ", totalPriceTicket);
+
         InflightMeals();
         BaggageAllowance();
 
         printf("\n\n");
         printf("%79s", "-----Personal Information------\n\n");
-        printf("%63s %s", "Name:", name);
+        printf("%63s %s\n", "Name:", name);
         printf("%63s %d\n", "Age:", age);
-        printf("%63s %s", "Nationality:", nationality);
+        printf("%63s %s\n", "Nationality:", nationality);
         printf("%63s %s\n", "Place of birth:", placeOfBirth);
 
         printf("\n%78s\n", "--------------Receipt--------------");
@@ -206,16 +210,16 @@ void UserInfo()
     printf("\n\n");
     printf("%82s", "-------------User Info--------------\n\n");
 
-    printf("%62s", "Insert your full name: ");
+    printf("%69s", "Insert your full name: ");
     gets(name);
 
-    printf("%62s", "Please insert your nationality: ");
+    printf("%69s", "Please insert your nationality: ");
     gets(nationality);
 
-    printf("%62s", "Place of birth: ");
+    printf("%69s", "Place of birth: ");
     gets(placeOfBirth);
 
-    printf("%62s", "Please insert your age: ");
+    printf("%69s", "Please insert your age: ");
     scanf("%d", &age);
 }
 
@@ -226,7 +230,8 @@ void Condition()
 
     if (age < 18)
     {
-        printf("%80s", "Sorry but you're not permitted to travel alone at the age of below 18\n");
+        printf("\n");
+        printf("%98s", "Sorry but you're not permitted to travel alone at the age of below 18\n");
         canContinue = 0;
     }
     else
@@ -256,14 +261,15 @@ void Condition()
             }
         }
 
-        if (terms1 == 'y' && terms2 == 'y')
+        if ((terms1 == 'y' || terms1 == 'Y') && (terms2 == 'y' || terms2 == 'Y'))
         {
             printf("\n");
             printf("%77s", "Thank you for your cooperation\n\n");
         }
         else
         {
-            printf("\nDue to the fact that you doesn't agree with our terms and regulations we cannot continue this operation.\n");
+            printf("\n");
+            printf("%120s", "Due to the fact that you doesn't agree with our terms and regulations we cannot continue this operation.\n");
             canContinue = 0;
         }
     }
@@ -289,11 +295,13 @@ void InflightMeals()
     float price[6] = {15.00, 15.00, 7.00, 15.00, 10.00, 13.00}, priceMeal;
 
     ListMeals();
-    printf("Enter code 7 to skip this operation\n");
+    printf("\n");
+    printf("%80s", "Enter code 7 to skip this operation\n");
 
     do
     {
-        printf("\nEnter code of meal: ");
+        printf("\n");
+        printf("%72s", "Enter code of meal: ");
         scanf("%d", &meal);
 
         if (meal == 7)
@@ -302,7 +310,7 @@ void InflightMeals()
         }
         else
         {
-            printf("Total: ");
+            printf("%72s", "Total: ");
             scanf("%d", &num);
 
             switch (meal)
@@ -326,31 +334,38 @@ void InflightMeals()
                 priceMeal = num * price[meal - 1];
                 break;
             default:
-                printf("Please enter right code of meal\n");
+                printf("\n");
+                printf("%78s", "Please enter right code of meal\n");
                 break;
             }
 
             totalMeal += priceMeal;
-
-            printf("Do you want to book another meal (Y/N): ");
+            printf("\n");
+            printf("%80s", "Do you want to book another meal (Y/N): ");
             scanf(" %c", &repeat);
         }
     } while (repeat == 'Y' || repeat == 'y');
+
+    if (meal == 7)
+        printf("%63s\n", "Price meal: RM0.00");
+    else
+        printf("%63s %.2f\n", "Price Meal:", totalMeal);
 }
 
 void ListBaggageAllowance()
 {
-    printf("\n\t\t-------------Baggage Allowance---------\n\n");
-    printf("-------------------------------------------------------------\n");
-    printf("|Weight Category\t\t|         Domestic          |\n");
-    printf("|\t\t\t\t|---------------------------|\n");
-    printf("|\t\t\t\t|Online(MYR) | Counter(MYR) | \n");
-    printf("|-----------------------------------------------------------|\n");
-    printf("|0-20kg \t\t\t|    Free    |     Free     |\n");
-    printf("|21-25kg\t\t\t|     60     |      75      |\n");
-    printf("|26-30kg\t\t\t|    120     |     150      |\n");
-    printf("|31-35kg\t\t\t|    180     |     225      |\n");
-    printf("-------------------------------------------------------------\n\n");
+    printf("\n");
+    printf("%81s", "-------------Baggage Allowance---------\n\n");
+    printf("\t\t\t\t\t---------------------------------------------\n");
+    printf("\t\t\t\t\t|Weight Category|         Domestic          |\n");
+    printf("\t\t\t\t\t|               |---------------------------|\n");
+    printf("\t\t\t\t\t|               |Online(MYR) | Counter(MYR) | \n");
+    printf("\t\t\t\t\t|-------------------------------------------|\n");
+    printf("\t\t\t\t\t|0-20kg         |    Free    |     Free     |\n");
+    printf("\t\t\t\t\t|21-25kg        |     60     |      75      |\n");
+    printf("\t\t\t\t\t|26-30kg        |    120     |     150      |\n");
+    printf("\t\t\t\t\t|31-35kg        |    180     |     225      |\n");
+    printf("\t\t\t\t\t---------------------------------------------");
 }
 
 void BaggageAllowance()
@@ -361,24 +376,26 @@ void BaggageAllowance()
 
     ListBaggageAllowance();
 
-    printf("Payment type;\n");
-    printf("O = Online\n");
-    printf("C = Counter\n\n");
+    printf("\n\n");
+    printf("%67s", "Payment Type\n");
+    printf("%65s", "O : Online\n");
+    printf("%67s", "C : Counter\n\n");
 
     do
     {
-        printf("Insert Payment Type: ");
+        printf("%72s", "Insert Payment Type: ");
         scanf(" %c", &type);
+
+        printf("%65s", "Weight (kg) : ");
+        scanf("%f", &weight);
 
         if (type == 'O' || type == 'o')
         {
-            printf("Weight (kg) : ");
-            scanf("%f", &weight);
 
             if (weight > 0 && weight <= 20)
             {
-                printf("Your bill : FREE  ");
-                break;
+                printf("%79s", "Baggage Allowance Bill: Free");
+                x = 0;
             }
             else if (weight >= 21 && weight <= 25)
             {
@@ -386,7 +403,7 @@ void BaggageAllowance()
                 scanf("%d", &quantity);
                 totalBaggage = quantity * 60;
                 printf("Bill = RM%.2f", totalBaggage);
-                break;
+                x = 0;
             }
             else if (weight >= 26 && weight <= 30)
             {
@@ -394,7 +411,7 @@ void BaggageAllowance()
                 scanf("%d", &quantity);
                 totalBaggage = quantity * 120;
                 printf("Bill = RM%.2f", totalBaggage);
-                break;
+                x = 0;
             }
             else if (weight >= 31 && weight <= 35)
             {
@@ -402,24 +419,22 @@ void BaggageAllowance()
                 scanf("%d", &quantity);
                 totalBaggage = quantity * 180;
                 printf("Bill = RM%.2f", totalBaggage);
-                break;
+                x = 0;
             }
             else
             {
-                printf("Invalid\n");
+                printf("\n%67s", "Invalid\n\n");
                 x++;
             }
         }
 
         else if (type == 'C' || type == 'c')
         {
-            printf("Weight (kg) : ");
-            scanf("%f", &weight);
 
-            if (weight > 0 && weight <= 20)
+            if (weight >= 0 && weight <= 20)
             {
-                printf("Your bill : FREE  ");
-                break;
+                printf("%82s", "Baggage Allowance Bill: Free");
+                x = 0;
             }
             else if (weight >= 21 && weight <= 25)
             {
@@ -427,7 +442,7 @@ void BaggageAllowance()
                 scanf("%d", &quantity);
                 totalBaggage = quantity * 75;
                 printf("Bill = RM%.2f", totalBaggage);
-                break;
+                x = 0;
             }
             else if (weight >= 26 && weight <= 30)
             {
@@ -435,7 +450,7 @@ void BaggageAllowance()
                 scanf("%d", &quantity);
                 totalBaggage = quantity * 150;
                 printf("Bill = RM%.2f", totalBaggage);
-                break;
+                x = 0;
             }
             else if (weight >= 31 && weight <= 35)
             {
@@ -443,17 +458,17 @@ void BaggageAllowance()
                 scanf("%d", &quantity);
                 totalBaggage = quantity * 225;
                 printf("Bill = RM%.2f", totalBaggage);
-                break;
+                x = 0;
             }
             else
             {
-                printf("invalid\n");
+                printf("\n%63s", "Invalid\n\n");
                 x++;
             }
         }
         else
         {
-            printf("invalid\n");
+            printf("\n%63s", "Invalid\n\n");
             x++;
         }
 

@@ -28,15 +28,15 @@ int main()
         printf("Insert Payment Type: ");
         scanf(" %c", &type);
 
+        printf("Weight (kg) : ");
+        scanf("%f", &weight);
         if (type == 'O' || type == 'o')
         {
-            printf("Weight (kg) : ");
-            scanf("%f", &weight);
 
             if (weight > 0 && weight <= 20)
             {
                 printf("Your bill : FREE  ");
-                break;
+                x = 0;
             }
             else if (weight >= 21 && weight <= 25)
             {
@@ -44,7 +44,7 @@ int main()
                 scanf("%d", &quantity);
                 bill = quantity * 60;
                 printf("Bill = RM%.2f", bill);
-                break;
+                x = 0;
             }
             else if (weight >= 26 && weight <= 30)
             {
@@ -52,7 +52,7 @@ int main()
                 scanf("%d", &quantity);
                 bill = quantity * 120;
                 printf("Bill = RM%.2f", bill);
-                break;
+                x = 0;
             }
             else if (weight >= 31 && weight <= 35)
             {
@@ -60,7 +60,7 @@ int main()
                 scanf("%d", &quantity);
                 bill = quantity * 180;
                 printf("Bill = RM%.2f", bill);
-                break;
+                x = 0;
             }
             else
             {
@@ -71,13 +71,11 @@ int main()
 
         else if (type == 'C' || type == 'c')
         {
-            printf("Weight (kg) : ");
-            scanf("%f", &weight);
 
             if (weight > 0 && weight <= 20)
             {
                 printf("Your bill : FREE  ");
-                break;
+                x = 0;
             }
             else if (weight >= 21 && weight <= 25)
             {
@@ -85,7 +83,7 @@ int main()
                 scanf("%d", &quantity);
                 bill = quantity * 75;
                 printf("Bill = RM%.2f", bill);
-                break;
+                x = 0;
             }
             else if (weight >= 26 && weight <= 30)
             {
@@ -93,7 +91,7 @@ int main()
                 scanf("%d", &quantity);
                 bill = quantity * 150;
                 printf("Bill = RM%.2f", bill);
-                break;
+                x = 0;
             }
             else if (weight >= 31 && weight <= 35)
             {
@@ -101,7 +99,7 @@ int main()
                 scanf("%d", &quantity);
                 bill = quantity * 225;
                 printf("Bill = RM%.2f", bill);
-                break;
+                x = 0;
             }
             else
             {
