@@ -1,15 +1,23 @@
 #include <stdio.h>
 #include <string.h>
 
+void UserInfo();
+
 int Booking();
 void ListDestination();
-void Aircraft();
-void UserInfo();
-void ListMeals();
+
 void InflightMeals();
+void ListMeals();
+
+void BaggageAllowance();
+void ListBaggageAllowance();
+
+void Aircraft();
+void Logo();
 
 char name[200], nationality[200], placeOfBirth[200];
 int age;
+float totalMeal = 0, totalPriceTicket, totalPrice, totalBaggage;
 
 int main()
 {
@@ -18,16 +26,7 @@ int main()
     char wantContinue;
     int canContinue = 1;
 
-    /*----------------------------------------------------------------THIS IS ART------------------------------------------------------------*/
-    printf("              888                                                     ,e,                                          \n");
-    printf(" dP\"Y  ,e e,  888  ,\"Y88b 888 8e   e88 888  e88 88e  888,8,    ,\"Y88b  \"  888,8, Y8b Y8b Y888P  ,\"Y88b Y8b Y888P  dP\"Y \n");
-    printf("C88b  d88 88b 888 \"8\" 888 888 88b d888 888 d888 888b 888 \"    \"8\" 888 888 888 \"   Y8b Y8b Y8P  \"8\" 888  Y8b Y8P  C88b  \n");
-    printf(" Y88D 888   , 888 ,ee 888 888 888 Y888 888 Y888 888P 888      ,ee 888 888 888      Y8b Y8b \"   ,ee 888   Y8b Y    Y88D \n");
-    printf("d,dP   \"YeeP\" 888 \"88 888 888 888  \"88 888  \"88 88\"  888      \"88 888 888 888       YP  Y8P    \"88 888    888    d,dP  \n");
-    printf("                                    ,  88P                                                                888          \n");
-    printf("                                   \"8\",P\"                                                                 888          \n\n\n");
-    /*----------------------------------------------------------------THIS IS ART------------------------------------------------------------*/
-
+    Logo();
     UserInfo();
 
     while (canContinue == 1)
@@ -38,6 +37,7 @@ int main()
         printf("%61s", "[0] Start Booking\n");
         printf("%67s", "[1] Display Destination\n");
         printf("%70s", "[2] Display Inflight Meals\n");
+        printf("%73s", "[3] Display Baggage Allowance\n");
 
         printf("\n\n%94s", "Choose the number provided in the menu to go to your desired page: ");
         scanf("%d", &menu);
@@ -56,6 +56,9 @@ int main()
             ListMeals();
             canContinue = 0;
             break;
+        case 3:
+            ListBaggageAllowance();
+            canContinue = 0;
         default:
             printf("\n\n%66s\n", "Invalid Input");
             canContinue = 0;
@@ -84,8 +87,8 @@ int Booking()
     ListDestination();
 
     int numberTicket, canContinue2 = 1;
-    char destinationCharacter, destinationName[60], departure[60], arrival[60];
-    float totalPrice, discount, priceDiscount, ticketPrice;
+    char destinationCharacter, destinationName[60], departure[60], arrival[60], continueMeal;
+    float discount, priceDiscount, ticketPrice;
 
     printf("\n\n%96s", "Please choose your desired destination based on the destination code: ");
     scanf(" %c", &destinationCharacter);
@@ -145,7 +148,10 @@ int Booking()
 
         printf("\n%84s", "Please insert number of tickets you want to buy: ");
         scanf("%d", &numberTicket);
-        totalPrice = numberTicket * ticketPrice;
+        totalPriceTicket = numberTicket * ticketPrice;
+
+        InflightMeals();
+        BaggageAllowance();
 
         printf("\n\n");
         printf("%79s", "-----Personal Information------\n\n");
@@ -160,18 +166,19 @@ int Booking()
         printf("%63s%s\n", "Departure Time: ", departure);
         printf("%63s%s\n", "Arrival Time: ", arrival);
 
+        totalPrice = totalBaggage + totalMeal + totalPriceTicket;
+
         if (totalPrice > 500)
         {
-            discount = 0.1;
-            priceDiscount = discount * totalPrice;
-            printf("%65s%.2f\n%62s %d", "Total ticket price: RM", totalPrice, "Total number ticket:", numberTicket);
+            totalPrice *= 0.9;
+            printf("%65s%.2f\n%62s %d", "Overall Total: RM", totalPrice, "Total number ticket:", numberTicket);
             printf("\n\n%102s\n%78s", "Due to the pandemic of Covid 19, Selangor Airways will give a 10%% discount ", "for customers with a total price more than RM500.00.");
 
             Aircraft();
         }
         else
         {
-            printf("%65s%.2f\n%63s%d", "Total ticket price: RM", totalPrice, "Number of ticket: ", numberTicket);
+            printf("%65s%.2f\n%63s%d", "Overall Total: RM", totalPrice, "Number of ticket: ", numberTicket);
 
             Aircraft();
         }
@@ -190,21 +197,6 @@ void ListDestination()
     printf("%107s", "[D]             Johor Bharu           10:00am           11:15pm          RM185.50 \n");
     printf("%107s", "[E]             Penang                11:00am           12:30pm          RM190.50 \n");
     printf("%107s", "[F]             Alor Setar            12:00am           2:00pm           RM210.00 \n");
-}
-
-void Aircraft()
-{
-
-    printf("\n\n%80s\n\n", "Thanks for choosing Selangor Airways!");
-
-    printf("%90s", "______                                                    \n");
-    printf("%90s", "         _\\ _~-\\___                                       \n");
-    printf("%90s", " =  = ==(____AA____D                                      \n");
-    printf("%90s", "             \\_____\\___________________,-~~~~~~~`-.._     \n");
-    printf("%90s", "             /     o O o o o o O O o o o o o o O o  |\\_   \n");
-    printf("%90s", "             `~-.__        ___..----..                  ) \n");
-    printf("%90s", "                   `---~~\\___________/------------`````   \n");
-    printf("%90s", "                   =  ===(_________D                      \n");
 }
 
 void UserInfo()
@@ -271,7 +263,7 @@ void UserInfo()
 void ListMeals()
 {
     printf("\n");
-    printf("%81s", "----------------Meal----------------\n");
+    printf("%81s", "----------------Meal----------------\n\n");
 
     printf("%82s", "[1] Nasi lemak               (RM15.00)\n");
     printf("%82s", "[2] Nasi kandar              (RM15.00)\n");
@@ -285,59 +277,61 @@ void InflightMeals()
 {
     int num;
     char meal, repeat;
-    float price[6] = {15.00, 15.00, 7.00, 15.00, 10.00, 13.00}, totalPrice = 0;
+    float price[6] = {15.00, 15.00, 7.00, 15.00, 10.00, 13.00}, priceMeal;
 
     ListMeals();
+    printf("Enter code 7 to skip this operation\n");
 
     do
     {
         printf("\nEnter code of meal: ");
         scanf("%d", &meal);
-        printf("Total: ");
-        scanf("%d", &num);
 
-        switch (meal)
+        if (meal == 7)
         {
-        case 1:
-            totalPrice = num * price[meal - 1];
-            break;
-        case 2:
-            totalPrice = num * price[meal - 1];
-            break;
-        case 3:
-            totalPrice = num * price[meal - 1];
-            break;
-        case 4:
-            totalPrice = num * price[meal - 1];
-            break;
-        case 5:
-            totalPrice = num * price[meal - 1];
-            break;
-        case 6:
-
-            totalPrice = num * price[meal - 1];
-            break;
-        default:
-            printf("Please enter right code of meal\n");
-            break;
+            repeat = 'n';
         }
+        else
+        {
+            printf("Total: ");
+            scanf("%d", &num);
 
-        printf("Do you want to book another meal (Y/N): ");
-        scanf(" %c", &repeat);
+            switch (meal)
+            {
+            case 1:
+                priceMeal = num * price[meal - 1];
+                break;
+            case 2:
+                priceMeal = num * price[meal - 1];
+                break;
+            case 3:
+                priceMeal = num * price[meal - 1];
+                break;
+            case 4:
+                priceMeal = num * price[meal - 1];
+                break;
+            case 5:
+                priceMeal = num * price[meal - 1];
+                break;
+            case 6:
+                priceMeal = num * price[meal - 1];
+                break;
+            default:
+                printf("Please enter right code of meal\n");
+                break;
+            }
 
+            totalMeal += priceMeal;
+
+            printf("Do you want to book another meal (Y/N): ");
+            scanf(" %c", &repeat);
+        }
     } while (repeat == 'Y' || repeat == 'y');
-
-    printf("\nTotal price: %.2f", totalPrice);
 }
 
-BaggageAllowance()
+void ListBaggageAllowance()
 {
-
-    char type;
-    float weight, bill;
-    int quantity, x = 0;
-
-    printf("\n\t\t*BUGGAGE ALLOWANCE*\n\n");
+    printf("\n\t\t-------------Baggage Allowance---------\n\n");
     printf("-------------------------------------------------------------\n");
     printf("|Weight Category\t\t|         Domestic          |\n");
     printf("|\t\t\t\t|---------------------------|\n");
@@ -348,6 +342,15 @@ BaggageAllowance()
     printf("|26-30kg\t\t\t|    120     |     150      |\n");
     printf("|31-35kg\t\t\t|    180     |     225      |\n");
     printf("-------------------------------------------------------------\n\n");
+}
+
+void BaggageAllowance()
+{
+    char type;
+    float weight;
+    int quantity, x = 0;
+
+    ListBaggageAllowance();
 
     printf("Payment type;\n");
     printf("O = Online\n");
@@ -372,29 +375,29 @@ BaggageAllowance()
             {
                 printf("Quantity : ");
                 scanf("%d", &quantity);
-                bill = quantity * 60;
-                printf("Bill = RM%.2f", bill);
+                totalBaggage = quantity * 60;
+                printf("Bill = RM%.2f", totalBaggage);
                 break;
             }
             else if (weight >= 26 && weight <= 30)
             {
                 printf("Quantity : ");
                 scanf("%d", &quantity);
-                bill = quantity * 120;
-                printf("Bill = RM%.2f", bill);
+                totalBaggage = quantity * 120;
+                printf("Bill = RM%.2f", totalBaggage);
                 break;
             }
             else if (weight >= 31 && weight <= 35)
             {
                 printf("Quantity : ");
                 scanf("%d", &quantity);
-                bill = quantity * 180;
-                printf("Bill = RM%.2f", bill);
+                totalBaggage = quantity * 180;
+                printf("Bill = RM%.2f", totalBaggage);
                 break;
             }
             else
             {
-                printf("invalid\n");
+                printf("Invalid\n");
                 x++;
             }
         }
@@ -413,24 +416,24 @@ BaggageAllowance()
             {
                 printf("Quantity : ");
                 scanf("%d", &quantity);
-                bill = quantity * 75;
-                printf("Bill = RM%.2f", bill);
+                totalBaggage = quantity * 75;
+                printf("Bill = RM%.2f", totalBaggage);
                 break;
             }
             else if (weight >= 26 && weight <= 30)
             {
                 printf("Quantity : ");
                 scanf("%d", &quantity);
-                bill = quantity * 150;
-                printf("Bill = RM%.2f", bill);
+                totalBaggage = quantity * 150;
+                printf("Bill = RM%.2f", totalBaggage);
                 break;
             }
             else if (weight >= 31 && weight <= 35)
             {
                 printf("Quantity : ");
                 scanf("%d", &quantity);
-                bill = quantity * 225;
-                printf("Bill = RM%.2f", bill);
+                totalBaggage = quantity * 225;
+                printf("Bill = RM%.2f", totalBaggage);
                 break;
             }
             else
@@ -446,6 +449,32 @@ BaggageAllowance()
         }
 
     } while (x >= 1);
+}
 
-    return 0;
+void Aircraft()
+{
+
+    printf("\n\n%80s\n\n", "Thanks for choosing Selangor Airways!");
+
+    printf("%90s", "______                                                    \n");
+    printf("%90s", "         _\\ _~-\\___                                       \n");
+    printf("%90s", " =  = ==(____AA____D                                      \n");
+    printf("%90s", "             \\_____\\___________________,-~~~~~~~`-.._     \n");
+    printf("%90s", "             /     o O o o o o O O o o o o o o O o  |\\_   \n");
+    printf("%90s", "             `~-.__        ___..----..                  ) \n");
+    printf("%90s", "                   `---~~\\___________/------------`````   \n");
+    printf("%90s", "                   =  ===(_________D                      \n");
+}
+
+void Logo()
+{
+    /*----------------------------------------------------------------THIS IS ART------------------------------------------------------------*/
+    printf("              888                                                     ,e,                                          \n");
+    printf(" dP\"Y  ,e e,  888  ,\"Y88b 888 8e   e88 888  e88 88e  888,8,    ,\"Y88b  \"  888,8, Y8b Y8b Y888P  ,\"Y88b Y8b Y888P  dP\"Y \n");
+    printf("C88b  d88 88b 888 \"8\" 888 888 88b d888 888 d888 888b 888 \"    \"8\" 888 888 888 \"   Y8b Y8b Y8P  \"8\" 888  Y8b Y8P  C88b  \n");
+    printf(" Y88D 888   , 888 ,ee 888 888 888 Y888 888 Y888 888P 888      ,ee 888 888 888      Y8b Y8b \"   ,ee 888   Y8b Y    Y88D \n");
+    printf("d,dP   \"YeeP\" 888 \"88 888 888 888  \"88 888  \"88 88\"  888      \"88 888 888 888       YP  Y8P    \"88 888    888    d,dP  \n");
+    printf("                                    ,  88P                                                                888          \n");
+    printf("                                   \"8\",P\"                                                                 888          \n\n\n");
+    /*----------------------------------------------------------------THIS IS ART------------------------------------------------------------*/
 }

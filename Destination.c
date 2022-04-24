@@ -127,11 +127,12 @@ void Booking(void)
         printf("\n%63s%s\n", "Destination: ", destinationName);
         printf("%63s%s\n", "Departure Time: ", departure);
         printf("%63s%s\n", "Arrival Time: ", arrival);
+
         if (totalPrice > 500)
         {
-            discount = 0.1;
+            discount = 0.9;
             priceDiscount = discount * totalPrice;
-            printf("%65s%.2f\n%62s %d", "Total ticket price: RM", totalPrice, "Total number ticket:", numberTicket);
+            printf("%65s%.2f\n%62s %d", "Total ticket price: RM", priceDiscount, "Total number ticket:", numberTicket);
             printf("\n\n%102s\n%78s", "Due to the pandemic of Covid 19, Selangor Airways will give a 10% discount ", "for customers with a total price more than RM500.00.");
         }
         else
@@ -152,5 +153,5 @@ void Destination(void)
     printf("%107s", "[C]             Kota Bharu            11:30am           1:30pm           RM210.00 \n");
     printf("%107s", "[D]             Johor Bharu           10:00am           11:15pm          RM185.50 \n");
     printf("%107s", "[E]             Penang                11:00am           12:30pm          RM190.50 \n");
-    printf("%107s", "[F]             Alor Setar            12:00am           2:00pm           RM210.00 \n");
+    printf("%107s", "[F]             Alor Setar            12:00am           2:00pm           RM210.50 \n");
 }
