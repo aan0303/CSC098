@@ -16,14 +16,13 @@ void Aircraft();
 void Logo();
 
 void Condition();
+
 char name[200], nationality[200], placeOfBirth[200];
 int age, canContinue = 1;
-
 float totalMeal = 0, totalPriceTicket, totalPrice, totalBaggage;
 
 int main()
 {
-
     int menu;
     char wantContinue;
 
@@ -33,7 +32,6 @@ int main()
 
     while (canContinue == 1)
     {
-
         printf("%81s", "----------------Menu----------------\n\n");
 
         printf("%61s", "[0] Start Booking\n");
@@ -48,23 +46,18 @@ int main()
         {
         case 0:
             Booking();
-            canContinue = 0;
             break;
         case 1:
             ListDestination();
-            canContinue = 0;
             break;
         case 2:
             ListMeals();
-            canContinue = 0;
             break;
         case 3:
             ListBaggageAllowance();
-            canContinue = 0;
             break;
         default:
             printf("\n\n%66s\n", "Invalid Input Number 1");
-            canContinue = 0;
             break;
         }
 
@@ -79,19 +72,17 @@ int main()
             canContinue = 1;
         }
         else
-        {
             canContinue = 0;
-        }
     }
 }
 
 int Booking()
 {
-    ListDestination();
-
     int numberTicket, canContinue2 = 1;
-    char destinationCharacter, destinationName[60], departure[60], arrival[60], continueMeal;
-    float discount, priceDiscount, ticketPrice;
+    char destinationCharacter, destinationName[60], departure[60], arrival[60];
+    float ticketPrice;
+
+    ListDestination();
 
     printf("\n\n%96s", "Please choose your desired destination based on the destination code: ");
     scanf(" %c", &destinationCharacter);
@@ -99,56 +90,61 @@ int Booking()
     switch (destinationCharacter)
     {
     case 'A':
+    case 'a':
         strcpy(destinationName, "Kuantan");
         strcpy(departure, "9:30am");
         strcpy(arrival, "10:40pm");
         ticketPrice = 185.5;
-
         break;
+
     case 'B':
+    case 'b':
         strcpy(destinationName, "Kuala Terengganu");
         strcpy(departure, "10:30am");
         strcpy(arrival, "12:00pm");
         ticketPrice = 190.5;
-
         break;
+
     case 'C':
+    case 'c':
         strcpy(destinationName, "Kota Bharu");
         strcpy(departure, "11:30am");
         strcpy(arrival, "1:30pm");
         ticketPrice = 210.0;
-
         break;
+
     case 'D':
+    case 'd':
         strcpy(destinationName, "Johor Bharu");
         strcpy(departure, "11:30am");
         strcpy(arrival, "11:15pm");
         ticketPrice = 185.5;
-
         break;
+
     case 'E':
+    case 'e':
         strcpy(destinationName, "Penang");
         strcpy(departure, "11:00am");
         strcpy(arrival, "12:30pm");
         ticketPrice = 190.5;
-
         break;
+
     case 'F':
+    case 'f':
         strcpy(destinationName, "Alor Setar");
         strcpy(departure, "12:00am");
         strcpy(arrival, "2:00pm");
         ticketPrice = 210.5;
-
         break;
+
     default:
-        printf("\n%67s", "Invalid Input Number 2");
+        printf("\n%67s", "Invalid Input");
         canContinue2 = 0;
         break;
     }
 
     if (canContinue2 == 1)
     {
-
         printf("\n%84s", "Please insert number of tickets you want to buy: ");
         scanf("%d", &numberTicket);
         totalPriceTicket = numberTicket * ticketPrice;
@@ -158,8 +154,7 @@ int Booking()
         InflightMeals();
         BaggageAllowance();
 
-        printf("\n\n");
-        printf("%79s", "-----Personal Information------\n\n");
+        printf("\n\n%79s", "-----Personal Information------\n\n");
         printf("%63s %s\n", "Name:", name);
         printf("%63s %d\n", "Age:", age);
         printf("%63s %s\n", "Nationality:", nationality);
@@ -178,21 +173,16 @@ int Booking()
             totalPrice *= 0.9;
             printf("%62s %d\n%65s%.2f", "Total number ticket:", numberTicket, "Overall Total: RM", totalPrice);
             printf("\n\n%102s\n%78s", "Due to the pandemic of Covid 19, Selangor Airways will give a 10%% discount ", "for customers with a total price more than RM500.00.");
-
-            Aircraft();
         }
         else
-        {
             printf("%62s %d\n%65s%.2f", "Total number ticket:", numberTicket, "Overall Total: RM", totalPrice);
 
-            Aircraft();
-        }
+        Aircraft();
     }
 }
 
 void ListDestination()
 {
-
     printf("\n\n%79s\n", "-------Available Destinations-------");
 
     printf("\n\n%107s\n", "Destination Code      Destination         Departure Time     Arrival Time      Ticket Price");
@@ -206,9 +196,7 @@ void ListDestination()
 
 void UserInfo()
 {
-
-    printf("\n\n");
-    printf("%82s", "-------------User Info--------------\n\n");
+    printf("\n\n%82s", "-------------User Info--------------\n\n");
 
     printf("%69s", "Insert your full name: ");
     gets(name);
@@ -230,14 +218,12 @@ void Condition()
 
     if (age < 18)
     {
-        printf("\n");
-        printf("%98s", "Sorry but you're not permitted to travel alone at the age of below 18\n");
+        printf("\n%98s", "Sorry but you're not permitted to travel alone at the age of below 18\n");
         canContinue = 0;
     }
     else
     {
-        printf("\n\n");
-        printf("%81s", "-------Terms and Regulations--------\n\n");
+        printf("\n\n%81s", "-------Terms and Regulations--------\n\n");
         printf("%97s", "Please read the terms accordingly and agree to continue this operation");
 
         for (i = 0; i < numberOfTerms; i++)
@@ -246,15 +232,13 @@ void Condition()
             {
             case 0:
             {
-                printf("\n\n");
-                printf("%102s", "Customers must arrive at the departure stations 30 mins before take off (y/n): ");
+                printf("\n\n%102s", "Customers must arrive at the departure stations 30 mins before take off (y/n): ");
                 scanf(" %c", &terms1);
                 break;
             }
             case 1:
             {
-                printf("\n");
-                printf("%110s", "Customers should not bring any dangerous substance or alcholic drinks on the aircraft (y/n): ");
+                printf("\n%110s", "Customers should not bring any dangerous substance or alcholic drinks on the aircraft (y/n): ");
                 scanf(" %c", &terms2);
                 break;
             }
@@ -263,13 +247,11 @@ void Condition()
 
         if ((terms1 == 'y' || terms1 == 'Y') && (terms2 == 'y' || terms2 == 'Y'))
         {
-            printf("\n");
-            printf("%77s", "Thank you for your cooperation\n\n");
+            printf("\n%77s", "Thank you for your cooperation\n\n");
         }
         else
         {
-            printf("\n");
-            printf("%120s", "Due to the fact that you doesn't agree with our terms and regulations we cannot continue this operation.\n");
+            printf("\n%120s", "Due to the fact that you doesn't agree with our terms and regulations we cannot continue this operation.\n");
             canContinue = 0;
         }
     }
@@ -277,8 +259,7 @@ void Condition()
 
 void ListMeals()
 {
-    printf("\n");
-    printf("%81s", "----------------Meal----------------\n\n");
+    printf("\n%81s", "----------------Meal----------------\n\n");
 
     printf("%82s", "[1] Nasi lemak               (RM15.00)\n");
     printf("%82s", "[2] Nasi kandar              (RM15.00)\n");
@@ -290,18 +271,16 @@ void ListMeals()
 
 void InflightMeals()
 {
-    int num;
-    char meal, repeat;
+    int num, meal;
+    char repeat;
     float price[6] = {15.00, 15.00, 7.00, 15.00, 10.00, 13.00}, priceMeal;
 
     ListMeals();
-    printf("\n");
-    printf("%80s", "Enter code 7 to skip this operation\n");
+    printf("\n%80s", "Enter code 7 to skip this operation\n");
 
     do
     {
-        printf("\n");
-        printf("%72s", "Enter code of meal: ");
+        printf("\n%72s", "Enter code of meal: ");
         scanf("%d", &meal);
 
         if (meal == 7)
@@ -334,28 +313,24 @@ void InflightMeals()
                 priceMeal = num * price[meal - 1];
                 break;
             default:
-                printf("\n");
-                printf("%78s", "Please enter right code of meal\n");
+                printf("\n%78s", "Please enter right code of meal\n");
+                priceMeal = 0;
                 break;
             }
 
             totalMeal += priceMeal;
-            printf("\n");
-            printf("%80s", "Do you want to book another meal (Y/N): ");
+
+            printf("\n%80s", "Do you want to book another meal (Y/N): ");
             scanf(" %c", &repeat);
         }
     } while (repeat == 'Y' || repeat == 'y');
 
-    if (meal == 7)
-        printf("%63s\n", "Price meal: RM0.00");
-    else
-        printf("%63s %.2f\n", "Price Meal:", totalMeal);
+    printf("%63s %.2f\n", "Price Meal:", totalMeal);
 }
 
 void ListBaggageAllowance()
 {
-    printf("\n");
-    printf("%81s", "-------------Baggage Allowance---------\n\n");
+    printf("\n%81s", "-------------Baggage Allowance---------\n\n");
     printf("\t\t\t\t\t---------------------------------------------\n");
     printf("\t\t\t\t\t|Weight Category|         Domestic          |\n");
     printf("\t\t\t\t\t|               |---------------------------|\n");
@@ -376,8 +351,7 @@ void BaggageAllowance()
 
     ListBaggageAllowance();
 
-    printf("\n\n");
-    printf("%67s", "Payment Type\n");
+    printf("\n\n%67s", "Payment Type\n");
     printf("%65s", "O : Online\n");
     printf("%67s", "C : Counter\n\n");
 
@@ -391,8 +365,7 @@ void BaggageAllowance()
 
         if (type == 'O' || type == 'o')
         {
-
-            if (weight > 0 && weight <= 20)
+            if (weight >= 0 && weight <= 20)
             {
                 printf("%79s", "Baggage Allowance Bill: Free");
                 x = 0;
@@ -477,7 +450,6 @@ void BaggageAllowance()
 
 void Aircraft()
 {
-
     printf("\n\n%80s\n\n", "Thanks for choosing Selangor Airways!");
 
     printf("%90s", "______                                                    \n");
