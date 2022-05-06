@@ -372,26 +372,26 @@ void BaggageAllowance()
             }
             else if (weight >= 21 && weight <= 25)
             {
-                printf("Quantity : ");
+                printf("%62s", "Quantity : ");
                 scanf("%d", &quantity);
                 totalBaggage = quantity * 60;
-                printf("Bill = RM%.2f", totalBaggage);
+                printf("%68s%.2f", "Baggage Bill = RM", totalBaggage);
                 x = 0;
             }
             else if (weight >= 26 && weight <= 30)
             {
-                printf("Quantity : ");
+                printf("%62s", "Quantity : ");
                 scanf("%d", &quantity);
                 totalBaggage = quantity * 120;
-                printf("Bill = RM%.2f", totalBaggage);
+                printf("%68s%.2f", "Baggage Bill = RM", totalBaggage);
                 x = 0;
             }
             else if (weight >= 31 && weight <= 35)
             {
-                printf("Quantity : ");
+                printf("%62s", "Quantity : ");
                 scanf("%d", &quantity);
                 totalBaggage = quantity * 180;
-                printf("Bill = RM%.2f", totalBaggage);
+                printf("%68s%.2f", "Baggage Bill = RM", totalBaggage);
                 x = 0;
             }
             else
@@ -411,26 +411,26 @@ void BaggageAllowance()
             }
             else if (weight >= 21 && weight <= 25)
             {
-                printf("Quantity : ");
+                printf("%62s", "Quantity : ");
                 scanf("%d", &quantity);
                 totalBaggage = quantity * 75;
-                printf("Bill = RM%.2f", totalBaggage);
+                printf("%68s%.2f", "Baggage Bill = RM", totalBaggage);
                 x = 0;
             }
             else if (weight >= 26 && weight <= 30)
             {
-                printf("Quantity : ");
+                printf("%62s", "Quantity : ");
                 scanf("%d", &quantity);
                 totalBaggage = quantity * 150;
-                printf("Bill = RM%.2f", totalBaggage);
+                printf("%68s%.2f", "Baggage Bill = RM", totalBaggage);
                 x = 0;
             }
             else if (weight >= 31 && weight <= 35)
             {
-                printf("Quantity : ");
+                printf("%62s", "Quantity : ");
                 scanf("%d", &quantity);
                 totalBaggage = quantity * 225;
-                printf("Bill = RM%.2f", totalBaggage);
+                printf("%68s%.2f", "Baggage Bill = RM", totalBaggage);
                 x = 0;
             }
             else
