@@ -57,7 +57,7 @@ int main()
             ListBaggageAllowance();
             break;
         default:
-            printf("\n\n%66s\n", "Invalid Input Number 1");
+            printf("\n\n%66s\n", "Invalid Input");
             break;
         }
 
@@ -149,7 +149,7 @@ int Booking()
         scanf("%d", &numberTicket);
         totalPriceTicket = numberTicket * ticketPrice;
 
-        printf("%68s %.2f\n", "Total Price Ticket: ", totalPriceTicket);
+        printf("%68s RM%.2f\n", "Total Price Ticket: ", totalPriceTicket);
 
         InflightMeals();
         BaggageAllowance();
@@ -232,7 +232,7 @@ void Condition()
             {
             case 0:
             {
-                printf("\n\n%102s", "Customers must arrive at the departure stations 30 mins before take off (y/n): ");
+                printf("\n\n%102s", "Customers must arrive at the departure stations 30 minutes before take off (y/n): ");
                 scanf(" %c", &terms1);
                 break;
             }
