@@ -259,7 +259,7 @@ void DestinationBooking()
         {
             totalPrice *= 0.9;
             printf("%62s %d\n%65s%.2f", "Total number ticket:", numberTicket, "Overall Total: RM", totalPrice);
-            printf("\n\n%102s\n%78s", "Due to the pandemic of Covid 19, Selangor Airways will give a 10%% discount ", "for customers with a total price more than RM500.00.");
+            printf("\n\n%102s\n%78s", "Due to the pandemic of Covid 19, Selangor Airways will give a 10% discount ", "for customers with a total price more than RM500.00.");
         }
         else
             printf("%62s %d\n%65s%.2f", "Total number ticket:", numberTicket, "Overall Total: RM", totalPrice);
