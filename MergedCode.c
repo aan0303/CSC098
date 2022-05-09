@@ -1,22 +1,29 @@
 #include <stdio.h>
 #include <string.h>
 
+// User Info Function Prototype
 void UserInfo();
 
-int Booking();
+// Destination Function Prototype
+void DestinationBooking();
 void ListDestination();
 
+// Inflight Meals Function Prototype
 void InflightMeals();
 void ListMeals();
 
+// Baggage Allowance Function Prototype
 void BaggageAllowance();
 void ListBaggageAllowance();
 
+// ASCII Art Function Prototype
 void Aircraft();
 void Logo();
 
+// Terms and Regulation Function Prototype
 void Condition();
 
+// Global Variables
 char name[200], nationality[200], placeOfBirth[200];
 int age, canContinue = 1;
 float totalMeal = 0, totalPriceTicket, totalPrice, totalBaggage;
@@ -45,7 +52,7 @@ int main()
         switch (menu)
         {
         case 0:
-            Booking();
+            DestinationBooking();
             break;
         case 1:
             ListDestination();
@@ -76,7 +83,87 @@ int main()
     }
 }
 
-int Booking()
+// User Info section
+void UserInfo()
+{
+    printf("\n\n%82s", "-------------User Info--------------\n\n");
+
+    printf("%69s", "Insert your full name: ");
+    gets(name);
+
+    printf("%69s", "Please insert your nationality: ");
+    gets(nationality);
+
+    printf("%69s", "Place of birth: ");
+    gets(placeOfBirth);
+
+    printf("%69s", "Please insert your age: ");
+    scanf("%d", &age);
+}
+
+// Terms and Services section
+void Condition()
+{
+    int numberOfTerms = 2, i;
+    char terms1, terms2;
+
+    if (age < 18)
+    {
+        printf("\n%98s", "Sorry but you're not permitted to travel alone at the age of below 18\n");
+        canContinue = 0;
+    }
+    else
+    {
+        printf("\n\n%81s", "-------Terms and Regulations--------\n\n");
+        printf("%97s", "Please read the terms accordingly and agree to continue this operation");
+
+        for (i = 0; i < numberOfTerms; i++)
+        {
+            switch (i)
+            {
+            case 0:
+            {
+                printf("\n\n%102s", "Customers must arrive at the departure stations 30 minutes before take off (y/n): ");
+                scanf(" %c", &terms1);
+                break;
+            }
+            case 1:
+            {
+                printf("\n%110s", "Customers should not bring any dangerous substance or alcholic drinks on the aircraft (y/n): ");
+                scanf(" %c", &terms2);
+                break;
+            }
+            }
+        }
+
+        if ((terms1 == 'y' || terms1 == 'Y') && (terms2 == 'y' || terms2 == 'Y'))
+        {
+            printf("\n%77s", "Thank you for your cooperation\n\n");
+        }
+        else
+        {
+            printf("\n%120s", "Due to the fact that you doesn't agree with our terms and regulations we cannot continue this operation.\n");
+            canContinue = 0;
+        }
+    }
+}
+
+// To dislay destination options
+void ListDestination()
+{
+    printf("\n\n%79s\n", "-------Available Destinations-------");
+
+    printf("\n\n%107s\n", "Destination Code      Destination         Departure Time     Arrival Time      Ticket Price");
+    printf("%107s", "[A]             Kuantan               9:30am            10:40pm          RM185.50 \n");
+    printf("%107s", "[B]             Kuala Terengganu      10:30am           12:00pm          RM190.50 \n");
+    printf("%107s", "[C]             Kota Bharu            11:30am           1:30pm           RM210.00 \n");
+    printf("%107s", "[D]             Johor Bharu           10:00am           11:15pm          RM185.50 \n");
+    printf("%107s", "[E]             Penang                11:00am           12:30pm          RM190.50 \n");
+    printf("%107s", "[F]             Alor Setar            12:00am           2:00pm           RM210.50 \n");
+}
+
+// Destination Booking Section
+void DestinationBooking()
 {
     int numberTicket, canContinue2 = 1;
     char destinationCharacter, destinationName[60], departure[60], arrival[60];
@@ -181,82 +268,7 @@ int Booking()
     }
 }
 
-void ListDestination()
-{
-    printf("\n\n%79s\n", "-------Available Destinations-------");
-
-    printf("\n\n%107s\n", "Destination Code      Destination         Departure Time     Arrival Time      Ticket Price");
-    printf("%107s", "[A]             Kuantan               9:30am            10:40pm          RM185.50 \n");
-    printf("%107s", "[B]             Kuala Terengganu      10:30am           12:00pm          RM190.50 \n");
-    printf("%107s", "[C]             Kota Bharu            11:30am           1:30pm           RM210.00 \n");
-    printf("%107s", "[D]             Johor Bharu           10:00am           11:15pm          RM185.50 \n");
-    printf("%107s", "[E]             Penang                11:00am           12:30pm          RM190.50 \n");
-    printf("%107s", "[F]             Alor Setar            12:00am           2:00pm           RM210.50 \n");
-}
-
-void UserInfo()
-{
-    printf("\n\n%82s", "-------------User Info--------------\n\n");
-
-    printf("%69s", "Insert your full name: ");
-    gets(name);
-
-    printf("%69s", "Please insert your nationality: ");
-    gets(nationality);
-
-    printf("%69s", "Place of birth: ");
-    gets(placeOfBirth);
-
-    printf("%69s", "Please insert your age: ");
-    scanf("%d", &age);
-}
-
-void Condition()
-{
-    int numberOfTerms = 2, i;
-    char terms1, terms2;
-
-    if (age < 18)
-    {
-        printf("\n%98s", "Sorry but you're not permitted to travel alone at the age of below 18\n");
-        canContinue = 0;
-    }
-    else
-    {
-        printf("\n\n%81s", "-------Terms and Regulations--------\n\n");
-        printf("%97s", "Please read the terms accordingly and agree to continue this operation");
-
-        for (i = 0; i < numberOfTerms; i++)
-        {
-            switch (i)
-            {
-            case 0:
-            {
-                printf("\n\n%102s", "Customers must arrive at the departure stations 30 minutes before take off (y/n): ");
-                scanf(" %c", &terms1);
-                break;
-            }
-            case 1:
-            {
-                printf("\n%110s", "Customers should not bring any dangerous substance or alcholic drinks on the aircraft (y/n): ");
-                scanf(" %c", &terms2);
-                break;
-            }
-            }
-        }
-
-        if ((terms1 == 'y' || terms1 == 'Y') && (terms2 == 'y' || terms2 == 'Y'))
-        {
-            printf("\n%77s", "Thank you for your cooperation\n\n");
-        }
-        else
-        {
-            printf("\n%120s", "Due to the fact that you doesn't agree with our terms and regulations we cannot continue this operation.\n");
-            canContinue = 0;
-        }
-    }
-}
-
+// To display meals option
 void ListMeals()
 {
     printf("\n%81s", "----------------Meal----------------\n\n");
@@ -269,6 +281,7 @@ void ListMeals()
     printf("%82s", "[6] Spaghetti bolognese      (RM13.00)\n");
 }
 
+// Inflight Meals booking section
 void InflightMeals()
 {
     int num, meal;
@@ -328,6 +341,7 @@ void InflightMeals()
     printf("%63s %.2f\n", "Price Meal:", totalMeal);
 }
 
+// To display baggage allowance option
 void ListBaggageAllowance()
 {
     printf("\n%81s", "-------------Baggage Allowance---------\n\n");
@@ -343,6 +357,7 @@ void ListBaggageAllowance()
     printf("\t\t\t\t\t---------------------------------------------");
 }
 
+// Baggage Allowance Booking Section
 void BaggageAllowance()
 {
     char type;
@@ -448,6 +463,7 @@ void BaggageAllowance()
     } while (x >= 1);
 }
 
+// Below here is the code to represent the art of the Interface //
 void Aircraft()
 {
     printf("\n\n%80s\n\n", "Thanks for choosing Selangor Airways!");
@@ -464,7 +480,7 @@ void Aircraft()
 
 void Logo()
 {
-    /*----------------------------------------------------------------THIS IS ART------------------------------------------------------------*/
+
     printf("              888                                                     ,e,                                          \n");
     printf(" dP\"Y  ,e e,  888  ,\"Y88b 888 8e   e88 888  e88 88e  888,8,    ,\"Y88b  \"  888,8, Y8b Y8b Y888P  ,\"Y88b Y8b Y888P  dP\"Y \n");
     printf("C88b  d88 88b 888 \"8\" 888 888 88b d888 888 d888 888b 888 \"    \"8\" 888 888 888 \"   Y8b Y8b Y8P  \"8\" 888  Y8b Y8P  C88b  \n");
@@ -472,5 +488,6 @@ void Logo()
     printf("d,dP   \"YeeP\" 888 \"88 888 888 888  \"88 888  \"88 88\"  888      \"88 888 888 888       YP  Y8P    \"88 888    888    d,dP  \n");
     printf("                                    ,  88P                                                                888          \n");
     printf("                                   \"8\",P\"                                                                 888          \n\n\n");
-    /*----------------------------------------------------------------THIS IS ART------------------------------------------------------------*/
 }
+
+//-----------------------------------------------------------------//
